@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Needs - Community Feed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-droplet"></i></div>
+                <h1>BloodBank</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="donors.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-users"></i></span>
+                    <span class="nav-text">Donors</span>
+                </a>
+                <a href="blood-inventory.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-vial"></i></span>
+                    <span class="nav-text">Blood Inventory</span>
+                </a>
+                <a href="patients.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-hospital"></i></span>
+                    <span class="nav-text">Patients</span>
+                </a>
+                <a href="requests.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
+                    <span class="nav-text">Requests</span>
+                </a>
+                <a href="blood-needs.html" class="nav-item active">
+                    <span class="nav-icon"><i class="fas fa-map-pin"></i></span>
+                    <span class="nav-text">Blood Needs</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h2>Community Blood Needs</h2>
+                <div class="user-section">
+                    <span class="user-name">Admin</span>
+                    <div class="user-avatar">A</div>
+                </div>
+            </header>
+
+            <!-- Blood Needs Content -->
+            <section class="page-section">
+                <!-- Create Blood Need Request -->
+                <div class="card">
+                    <h3><i class="fas fa-exclamation-circle"></i> Post Blood Need</h3>
+                    <form class="form" id="bloodNeedForm">
+                        <div class="form-grid">
+                            <div class="form-group form-full">
+                                <label for="needType">Request Type *</label>
+                                <select id="needType" name="needType" required>
+                                    <option value="">Select type</option>
+                                    <option value="individual">Individual/Patient</option>
+                                    <option value="hospital">Hospital</option>
+                                    <option value="emergency">Emergency</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="needName">Name/Hospital Name *</label>
+                                <input type="text" id="needName" name="needName" placeholder="Your name or hospital" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="needPhone">Contact Phone *</label>
+                                <input type="tel" id="needPhone" name="needPhone" placeholder="Emergency contact" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="needBlood">Blood Group Needed *</label>
+                                <select id="needBlood" name="needBlood" required>
+                                    <option value="">Select blood group</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="needQuantity">Units Needed *</label>
+                                <input type="number" id="needQuantity" name="needQuantity" placeholder="Number of units" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="needUrgency">Urgency Level *</label>
+                                <select id="needUrgency" name="needUrgency" required>
+                                    <option value="">Select urgency</option>
+                                    <option value="critical">Critical - Within 24hrs</option>
+                                    <option value="urgent">Urgent - Within 3 days</option>
+                                    <option value="normal">Normal - Within a week</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="needLocation">Location/Address *</label>
+                                <input type="text" id="needLocation" name="needLocation" placeholder="Hospital/Area address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="needCity">City *</label>
+                                <input type="text" id="needCity" name="needCity" placeholder="City name" required>
+                            </div>
+                            <div class="form-group form-full">
+                                <label for="needDescription">Additional Details</label>
+                                <textarea id="needDescription" name="needDescription" placeholder="Patient condition, medical details, etc." rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Post Blood Need</button>
+                            <button type="reset" class="btn btn-secondary"><i class="fas fa-times"></i> Clear</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Blood Needs Feed -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-list"></i> Active Blood Needs</h3>
+                        <div class="search-box">
+                            <input type="text" id="needSearch" placeholder="Search by location, name..." class="search-input">
+                            <span class="search-icon"><i class="fas fa-search"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Blood Needs List -->
+                    <div id="bloodNeedsList" class="blood-needs-list">
+                        <!-- Dummy Data -->
+                        <div class="blood-need-card">
+                            <div class="need-header">
+                                <div class="need-title-section">
+                                    <h4>Mohammad Ali - Post Surgery</h4>
+                                    <span class="urgency-badge critical"><i class="fas fa-warning"></i> Critical</span>
+                                </div>
+                                <div class="blood-group-large">O+</div>
+                            </div>
+
+                            <div class="need-info-grid">
+                                <div class="need-info-item">
+                                    <i class="fas fa-map-pin"></i>
+                                    <div>
+                                        <p class="info-label">Location</p>
+                                        <p class="info-value">Faisalabad Medical Hospital, Punjab</p>
+                                    </div>
+                                </div>
+
+                                <div class="need-info-item">
+                                    <i class="fas fa-droplet"></i>
+                                    <div>
+                                        <p class="info-label">Units Needed</p>
+                                        <p class="info-value">5 units</p>
+                                    </div>
+                                </div>
+
+                                <div class="need-info-item">
+                                    <i class="fas fa-phone"></i>
+                                    <div>
+                                        <p class="info-label">Contact</p>
+                                        <p class="info-value">+92-300-XXXX-123</p>
+                                    </div>
+                                </div>
+
+                                <div class="need-info-item">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <p class="info-label">Needed By</p>
+                                        <p class="info-value">Today (24 hours)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="need-description">
+                                <p><strong>Medical Condition:</strong> Post-operative patient, emergency surgery completed. Needs immediate blood transfusion for recovery.</p>
+                            </div>
+
+                            <div class="need-actions">
+                                <button class="btn btn-primary btn-respond">
+                                    <i class="fas fa-handshake"></i> I Can Help
+                                </button>
+                                <button class="btn btn-secondary btn-share">
+                                    <i class="fas fa-share-alt"></i> Share
+                                </button>
+                                <button class="btn btn-secondary btn-details">
+                                    <i class="fas fa-info-circle"></i> More Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Need Card 2 -->
+                        <div class="blood-need-card">
+                            <div class="need-header">
+                                <div class="need-title-section">
+                                    <h4>Lahore General Hospital</h4>
+                                    <span class="urgency-badge urgent"><i class="fas fa-exclamation-triangle"></i> Urgent</span>
+                                </div>
+                                <div class="blood-group-large">A-</div>
+                            </div>
+
+                            <div class="need-info-grid">
+                                <div class="need-info-item">
+                                    <i class="fas fa-map-pin"></i>
+                                    <div>
+                                        <p class="info-label">Location</p>
+                                        <p class="info-value">Lahore General Hospital, Punjab</p>
+                                    </div>
+                                </div>
+
+                                <div class="need-info-item">
+                                    <i class="fas fa-droplet"></i>
+                                    <div>
+                                        <p class="info-label">Units Needed</p>
+                                        <p class="info-value">8 units</p>
+                                    </div>
+                                </div>
+
+                                <div class="need-info-item">
+                                    <i class="fas fa-phone"></i>
+                                    <div>
+                                        <p class="info-label">Contact</p>
+                                        <p class="info-value">+92-42-XXXX-5678</p>
+                                    </div>
+                                </div>
+
+                                <div class="need-info-item">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <p class="info-label">Needed By</p>
+                                        <p class="info-value">Within 3 days</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="need-description">
+                                <p><strong>Medical Condition:</strong> Multiple trauma patients from accident. Rare blood type A- in high demand.</p>
+                            </div>
+
+                            <div class="need-actions">
+                                <button class="btn btn-primary btn-respond">
+                                    <i class="fas fa-handshake"></i> I Can Help
+                                </button>
+                                <button class="btn btn-secondary btn-share">
+                                    <i class="fas fa-share-alt"></i> Share
+                                </button>
+                                <button class="btn btn-secondary btn-details">
+                                    <i class="fas fa-info-circle"></i> More Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Need Card 3 -->
+                        <div class="blood-need-card">
+                            <div class="need-header">
+                                <div class="need-title-section">
+                                    <h4>Karachi Heart Institute</h4>
+                                    <span class="urgency-badge normal"><i class="fas fa-info-circle"></i> Normal</span>
+                                </div>
+                                <div class="blood-group-large">B+</div>
+                            </div>
+
+                            <div class="need-info-grid">
+                                <div class="need-info-item">
+                                    <i class="fas fa-map-pin"></i>
+                                    <div>
+                                        <p class="info-label">Location</p>
+                                        <p class="info-value">Karachi Heart Institute, Sindh</p>
+                                    </div>
+                                </div>
+
+                                <div class="need-info-item">
+                                    <i class="fas fa-droplet"></i>
+                                    <div>
+                                        <p class="info-label">Units Needed</p>
+                                        <p class="info-value">3 units</p>
+                                    </div>
+                                </div>
+
+                                <div class="need-info-item">
+                                    <i class="fas fa-phone"></i>
+                                    <div>
+                                        <p class="info-label">Contact</p>
+                                        <p class="info-value">+92-21-XXXX-9101</p>
+                                    </div>
+                                </div>
+
+                                <div class="need-info-item">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <p class="info-label">Needed By</p>
+                                        <p class="info-value">Within a week</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="need-description">
+                                <p><strong>Medical Condition:</strong> Routine cardiac surgery. Stock replenishment for emergency reserves.</p>
+                            </div>
+
+                            <div class="need-actions">
+                                <button class="btn btn-primary btn-respond">
+                                    <i class="fas fa-handshake"></i> I Can Help
+                                </button>
+                                <button class="btn btn-secondary btn-share">
+                                    <i class="fas fa-share-alt"></i> Share
+                                </button>
+                                <button class="btn btn-secondary btn-details">
+                                    <i class="fas fa-info-circle"></i> More Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fulfilled Requests (Recently Completed) -->
+                <div class="card">
+                    <h3><i class="fas fa-check-circle"></i> Recently Fulfilled Requests</h3>
+                    <div class="fulfilled-list">
+                        <div class="fulfilled-item">
+                            <div class="fulfilled-header">
+                                <h4>Ayesha Khan - Anemia Treatment</h4>
+                                <span class="completed-badge"><i class="fas fa-check"></i> Completed</span>
+                            </div>
+                            <p class="fulfilled-meta"><i class="fas fa-map-pin"></i> Islamabad Medical Complex, Islamabad | <i class="fas fa-droplet"></i> 2 units O+ | <i class="fas fa-user"></i> Donor: Hassan Ahmed</p>
+                        </div>
+                        <div class="fulfilled-item">
+                            <div class="fulfilled-header">
+                                <h4>Shifa Hospital Emergency</h4>
+                                <span class="completed-badge"><i class="fas fa-check"></i> Completed</span>
+                            </div>
+                            <p class="fulfilled-meta"><i class="fas fa-map-pin"></i> Shifa Hospital, Islamabad | <i class="fas fa-droplet"></i> 4 units AB+ | <i class="fas fa-users"></i> 2 Donors helped</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

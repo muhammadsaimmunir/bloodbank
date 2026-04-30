@@ -1,0 +1,1210 @@
+/* ============================================================================
+   BLOOD BANK MANAGEMENT SYSTEM - MODERN MINIMALISTIC DESIGN
+   ============================================================================ */
+
+/* ============================================================================
+   1. VARIABLES & ROOT STYLES
+   ============================================================================ */
+
+:root {
+    --color-primary: #dc2626;
+    --color-primary-light: #fee2e2;
+    --color-primary-dark: #991b1b;
+    --color-secondary: #6b7280;
+    --color-background: #f9fafb;
+    --color-surface: #ffffff;
+    --color-border: #e5e7eb;
+    --color-text: #1f2937;
+    --color-text-light: #6b7280;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+    --color-info: #3b82f6;
+    
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    
+    --transition: all 0.3s ease;
+}
+
+/* ============================================================================
+   2. GLOBAL STYLES
+   ============================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================================
+   3. LAYOUT STRUCTURE
+   ============================================================================ */
+
+.container {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background-color: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.main-content {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================================================
+   4. SIDEBAR & NAVIGATION
+   ============================================================================ */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-2xl);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.logo-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: -0.5px;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.nav-item:hover {
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+}
+
+.nav-item.active {
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+    border-left: 3px solid var(--color-primary);
+    padding-left: calc(var(--spacing-lg) - 3px);
+}
+
+.nav-icon {
+    font-size: 1.25rem;
+    width: 1.5rem;
+    text-align: center;
+}
+
+.nav-text {
+    flex: 1;
+}
+
+/* ============================================================================
+   5. HEADER SECTION
+   ============================================================================ */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-xl) var(--spacing-2xl);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.user-name {
+    color: var(--color-text-light);
+    font-weight: 500;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+/* ============================================================================
+   6. PAGE SECTIONS & CARDS
+   ============================================================================ */
+
+.page-section {
+    padding: var(--spacing-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+    flex: 1;
+}
+
+.dashboard {
+    padding: var(--spacing-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+    flex: 1;
+}
+
+.card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.card-header h3 {
+    margin: 0;
+}
+
+/* ============================================================================
+   7. DASHBOARD STATS
+   ============================================================================ */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.stat-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    flex-shrink: 0;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-content h4 {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-change {
+    font-size: 0.875rem;
+    color: var(--color-success);
+}
+
+/* ============================================================================
+   8. DASHBOARD GRID & BLOOD STOCK
+   ============================================================================ */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-2xl);
+}
+
+.blood-stock-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.blood-item {
+    display: grid;
+    grid-template-columns: 60px 1fr 100px;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.blood-group {
+    font-weight: 700;
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.blood-bar {
+    height: 8px;
+    background-color: var(--color-border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.blood-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.blood-qty {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    text-align: right;
+}
+
+/* ============================================================================
+   9. RECENT ITEMS LIST
+   ============================================================================ */
+
+.recent-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.recent-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-background);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.recent-item:hover {
+    background-color: #f3f4f6;
+}
+
+.recent-info {
+    flex: 1;
+}
+
+.recent-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+}
+
+.recent-meta {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+}
+
+/* ============================================================================
+   10. STATUS BADGES
+   ============================================================================ */
+
+.status-badge {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.status-badge.urgent {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.status-badge.pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-badge.approved {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-badge.completed {
+    background-color: #cffafe;
+    color: #164e63;
+}
+
+.blood-badge {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-md);
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+/* ============================================================================
+   11. FORMS & INPUTS
+   ============================================================================ */
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.form-full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+    display: block;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-family: inherit;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background-color: var(--color-surface);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.form-group input::placeholder {
+    color: var(--color-text-light);
+}
+
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--spacing-md) center;
+    padding-right: 2.5rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+/* ============================================================================
+   12. BUTTONS
+   ============================================================================ */
+
+.btn {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    min-height: 44px;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+    background-color: #f3f4f6;
+    border-color: var(--color-text-light);
+}
+
+.btn-icon {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-md);
+    background-color: transparent;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon.edit:hover {
+    background-color: #dbeafe;
+}
+
+.btn-icon.delete:hover {
+    background-color: var(--color-primary-light);
+}
+
+/* ============================================================================
+   13. SEARCH BOX
+   ============================================================================ */
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-input {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    transition: var(--transition);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background-color: var(--color-surface);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.search-input::placeholder {
+    color: var(--color-text-light);
+}
+
+.search-icon {
+    position: absolute;
+    right: var(--spacing-md);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-light);
+    pointer-events: none;
+}
+
+/* ============================================================================
+   14. TABLES
+   ============================================================================ */
+
+.table-responsive {
+    overflow-x: auto;
+    margin-top: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-surface);
+}
+
+.table thead {
+    background-color: var(--color-background);
+    border-bottom: 2px solid var(--color-border);
+}
+
+.table th {
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-text-light);
+}
+
+.table td {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+}
+
+.table tbody tr {
+    transition: var(--transition);
+}
+
+.table tbody tr:hover {
+    background-color: var(--color-background);
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ============================================================================
+   15. SECTION TITLE
+   ============================================================================ */
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ============================================================================
+   16. RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        bottom: auto;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--spacing-md) var(--spacing-lg);
+        z-index: 1000;
+    }
+
+    .logo {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .logo h1 {
+        display: none;
+    }
+
+    .nav-menu {
+        flex-direction: row;
+        gap: var(--spacing-md);
+        overflow-x: auto;
+    }
+
+    .nav-item {
+        flex-shrink: 0;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .nav-text {
+        display: none;
+    }
+
+    .main-content {
+        grid-column: 1;
+        margin-top: 80px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        text-align: center;
+    }
+
+    .header h2 {
+        font-size: 1.5rem;
+    }
+
+    .user-section {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .page-section,
+    .dashboard {
+        padding: var(--spacing-lg);
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h2 {
+        font-size: 1.25rem;
+    }
+
+    .stat-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .blood-item {
+        grid-template-columns: 50px 1fr;
+    }
+
+    .blood-qty {
+        grid-column: 2;
+        margin-top: var(--spacing-sm);
+        text-align: left;
+    }
+
+    .table {
+        font-size: 0.875rem;
+    }
+
+    .table th,
+    .table td {
+        padding: var(--spacing-sm);
+    }
+
+    .btn-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+}
+
+/* ============================================================================
+   17. UTILITIES & ANIMATIONS
+   ============================================================================ */
+
+.text-muted {
+    color: var(--color-text-light);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: var(--spacing-md); }
+.mt-2 { margin-top: var(--spacing-lg); }
+.mb-1 { margin-bottom: var(--spacing-md); }
+.mb-2 { margin-bottom: var(--spacing-lg); }
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: slideIn 0.3s ease;
+}
+
+/* ============================================================================
+   18. SCROLLBAR STYLING
+   ============================================================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 10px;
+}
+
+/* ============================================================================
+   18. SCROLLBAR STYLING
+   ============================================================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-light);
+}
+
+/* ============================================================================
+   19. BLOOD NEEDS FEED STYLES
+   ============================================================================ */
+
+.blood-needs-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+}
+
+.blood-need-card {
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+    transition: var(--transition);
+}
+
+.blood-need-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.need-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-lg);
+    gap: var(--spacing-lg);
+}
+
+.need-title-section {
+    flex: 1;
+}
+
+.need-title-section h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+}
+
+.blood-group-large {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    border: 3px solid var(--color-primary);
+    flex-shrink: 0;
+}
+
+.urgency-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.urgency-badge.critical {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.urgency-badge.urgent {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.urgency-badge.normal {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.need-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background-color: var(--color-background);
+    border-radius: var(--radius-md);
+}
+
+.need-info-item {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.need-info-item i {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+}
+
+.info-label {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.info-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.need-description {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: #fffbf0;
+    border-left: 4px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.need-description p {
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+.need-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.btn-respond {
+    flex: 1;
+    min-width: 150px;
+}
+
+.btn-share,
+.btn-details {
+    flex: 0 1 auto;
+}
+
+.fulfilled-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.fulfilled-item {
+    padding: var(--spacing-lg);
+    background-color: #f0fdf4;
+    border-left: 4px solid var(--color-success);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.fulfilled-item:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.fulfilled-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.fulfilled-header h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.completed-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 0.375rem 0.75rem;
+    background-color: #dcfce7;
+    color: #166534;
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.fulfilled-meta {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.fulfilled-meta i {
+    color: var(--color-success);
+}
+
+/* ============================================================================
+   20. ICON STYLING
+   ============================================================================ */
+
+.stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.stat-icon i {
+    color: var(--color-primary);
+}
+
+.nav-icon i {
+    font-size: 1.25rem;
+}
+
+.search-icon {
+    color: var(--color-text-light);
+}
+
+.search-icon i {
+    font-size: 1rem;
+}
+
+/* ============================================================================
+   21. RESPONSIVE - BLOOD NEEDS
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .blood-need-card {
+        padding: var(--spacing-lg);
+    }
+
+    .need-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .blood-group-large {
+        width: 80px;
+        height: 80px;
+        font-size: 1.875rem;
+        align-self: flex-start;
+    }
+
+    .need-info-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .need-actions {
+        flex-direction: column;
+    }
+
+    .btn-respond,
+    .btn-share,
+    .btn-details {
+        width: 100%;
+    }
+
+    .fulfilled-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    .fulfilled-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

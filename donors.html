@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Management - Blood Bank</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-droplet"></i></div>
+                <h1>BloodBank</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="donors.html" class="nav-item active">
+                    <span class="nav-icon"><i class="fas fa-users"></i></span>
+                    <span class="nav-text">Donors</span>
+                </a>
+                <a href="blood-inventory.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-vial"></i></span>
+                    <span class="nav-text">Blood Inventory</span>
+                </a>
+                <a href="patients.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-hospital"></i></span>
+                    <span class="nav-text">Patients</span>
+                </a>
+                <a href="requests.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
+                    <span class="nav-text">Requests</span>
+                </a>
+                <a href="blood-needs.html" class="nav-item">
+                    <span class="nav-icon"><i class="fas fa-map-pin"></i></span>
+                    <span class="nav-text">Blood Needs</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h2>Donor Management</h2>
+                <div class="user-section">
+                    <span class="user-name">Admin</span>
+                    <div class="user-avatar">A</div>
+                </div>
+            </header>
+
+            <!-- Donor Management Content -->
+            <section class="page-section">
+                <!-- Add Donor Form -->
+                <div class="card">
+                    <h3>Add New Donor</h3>
+                    <form class="form" id="donorForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="donorName">Full Name *</label>
+                                <input type="text" id="donorName" name="name" placeholder="Enter full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="donorAge">Age *</label>
+                                <input type="number" id="donorAge" name="age" placeholder="Enter age" min="18" max="65" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="donorBlood">Blood Group *</label>
+                                <select id="donorBlood" name="blood" required>
+                                    <option value="">Select blood group</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="donorPhone">Phone Number *</label>
+                                <input type="tel" id="donorPhone" name="phone" placeholder="Enter phone number" required>
+                            </div>
+                            <div class="form-group form-full">
+                                <label for="donorAddress">Address *</label>
+                                <input type="text" id="donorAddress" name="address" placeholder="Enter address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastDonation">Last Donation Date *</label>
+                                <input type="date" id="lastDonation" name="lastDonation" required>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Add Donor</button>
+                            <button type="reset" class="btn btn-secondary">Clear</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Donor List -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Donor List</h3>
+                        <div class="search-box">
+                            <input type="text" id="donorSearch" placeholder="Search by name, phone..." class="search-input">
+                            <span class="search-icon">🔍</span>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Blood Group</th>
+                                    <th>Phone</th>
+                                    <th>Last Donation</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="donorTableBody">
+                                <tr>
+                                    <td>#D001</td>
+                                    <td>Ahmed Hassan</td>
+                                    <td>28</td>
+                                    <td><span class="blood-badge">O+</span></td>
+                                    <td>+1-555-0101</td>
+                                    <td>2026-04-15</td>
+                                    <td>
+                                        <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="btn-icon delete" title="Delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#D002</td>
+                                    <td>Fatima Ahmed</td>
+                                    <td>32</td>
+                                    <td><span class="blood-badge">A+</span></td>
+                                    <td>+1-555-0102</td>
+                                    <td>2026-03-20</td>
+                                    <td>
+                                        <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="btn-icon delete" title="Delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#D003</td>
+                                    <td>Mohammed Ali</td>
+                                    <td>45</td>
+                                    <td><span class="blood-badge">B+</span></td>
+                                    <td>+1-555-0103</td>
+                                    <td>2026-02-10</td>
+                                    <td>
+                                        <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="btn-icon delete" title="Delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>#D004</td>
+                                    <td>Sarah Wilson</td>
+                                    <td>26</td>
+                                    <td><span class="blood-badge">AB+</span></td>
+                                    <td>+1-555-0104</td>
+                                    <td>2026-04-08</td>
+                                    <td>
+                                        <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="btn-icon delete" title="Delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
