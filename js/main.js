@@ -3,6 +3,58 @@
 // ============================================================================
 
 // ============================================================================
+// 0. MOBILE MENU FUNCTIONALITY
+// ============================================================================
+
+/**
+ * Initialize mobile hamburger menu
+ */
+function initializeMobileMenu() {
+    const hamburger = document.querySelector('.hamburger-menu');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.mobile-overlay');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    if (!hamburger) return;
+
+    // Toggle menu on hamburger click
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close menu when overlay is clicked
+    overlay.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    // Close menu when nav item is clicked
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Close menu on window resize (if going back to desktop)
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            hamburger.classList.remove('active');
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+// ============================================================================
 // 1. TOAST NOTIFICATION SYSTEM
 // ============================================================================
 

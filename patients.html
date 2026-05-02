@@ -3,72 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Management - Blood Bank</title>
+    <title>Patients - Blood Bank</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="logo.png" type="image/png">
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar Navigation -->
+        <div class="mobile-overlay"></div>
         <aside class="sidebar">
             <div class="logo">
-                <div class="logo-icon"><i class="fas fa-droplet"></i></div>
-                <h1>BloodBank</h1>
+                <div class="logo-icon">
+                    <img src="logo.png" alt="Logo" style="width: 32px; height: 32px; object-fit: contain; display: none;">
+                    <i class="fas fa-droplet"></i>
+                </div>
+                <h1>Blood Bank</h1>
             </div>
             <nav class="nav-menu">
-                <a href="index.html" class="nav-item">
-                    <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
-                    <span class="nav-text">Dashboard</span>
-                </a>
-                <a href="donors.html" class="nav-item">
-                    <span class="nav-icon"><i class="fas fa-users"></i></span>
-                    <span class="nav-text">Donors</span>
-                </a>
-                <a href="blood-inventory.html" class="nav-item">
-                    <span class="nav-icon"><i class="fas fa-vial"></i></span>
-                    <span class="nav-text">Blood Inventory</span>
-                </a>
-                <a href="patients.html" class="nav-item active">
-                    <span class="nav-icon"><i class="fas fa-hospital"></i></span>
-                    <span class="nav-text">Patients</span>
-                </a>
-                <a href="requests.html" class="nav-item">
-                    <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
-                    <span class="nav-text">Requests</span>
-                </a>
-                <a href="blood-needs.html" class="nav-item">
-                    <span class="nav-icon"><i class="fas fa-map-pin"></i></span>
-                    <span class="nav-text">Blood Needs</span>
-                </a>
+                <a href="index.html" class="nav-item"><span class="nav-icon"><i class="fas fa-chart-line"></i></span><span class="nav-text">Dashboard</span></a>
+                <a href="donors.html" class="nav-item"><span class="nav-icon"><i class="fas fa-users"></i></span><span class="nav-text">Donors</span></a>
+                <a href="blood-inventory.html" class="nav-item"><span class="nav-icon"><i class="fas fa-vial"></i></span><span class="nav-text">Blood Inventory</span></a>
+                <a href="patients.html" class="nav-item active"><span class="nav-icon"><i class="fas fa-hospital"></i></span><span class="nav-text">Patients</span></a>
+                <a href="requests.html" class="nav-item"><span class="nav-icon"><i class="fas fa-clipboard-list"></i></span><span class="nav-text">Requests</span></a>
+                <a href="blood-needs.html" class="nav-item"><span class="nav-icon"><i class="fas fa-map-pin"></i></span><span class="nav-text">Blood Needs</span></a>
             </nav>
         </aside>
-
-        <!-- Main Content -->
         <main class="main-content">
-            <!-- Header -->
             <header class="header">
-                <h2>Patient Management</h2>
-                <div class="user-section">
-                    <span class="user-name">Admin</span>
-                    <div class="user-avatar">A</div>
-                </div>
+                <button class="hamburger-menu" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+                <h2>Patients Management</h2>
+                <div class="user-section"><span class="user-name">Admin</span><div class="user-avatar">A</div></div>
             </header>
-
-            <!-- Patient Management Content -->
             <section class="page-section">
-                <!-- Add Patient Form -->
                 <div class="card">
-                    <h3>Add New Patient</h3>
+                    <div class="card-header"><h3><i class="fas fa-user-injured"></i> Register Patient</h3></div>
                     <form class="form" id="patientForm">
                         <div class="form-grid">
                             <div class="form-group">
-                                <label for="patientName">Full Name *</label>
-                                <input type="text" id="patientName" name="name" placeholder="Enter patient name" required>
+                                <label for="patientName">Full Name</label>
+                                <input type="text" id="patientName" placeholder="Patient's full name" required>
                             </div>
                             <div class="form-group">
-                                <label for="patientBlood">Blood Group *</label>
-                                <select id="patientBlood" name="bloodGroup" required>
-                                    <option value="">Select blood group</option>
+                                <label for="patientBlood">Blood Group Required</label>
+                                <select id="patientBlood" required>
+                                    <option value="">Select Blood Group</option>
                                     <option value="O+">O+</option>
                                     <option value="O-">O-</option>
                                     <option value="A+">A+</option>
@@ -80,108 +58,42 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="patientDisease">Disease/Condition *</label>
-                                <input type="text" id="patientDisease" name="disease" placeholder="Enter disease or condition" required>
+                                <label for="hospital">Hospital</label>
+                                <input type="text" id="hospital" placeholder="Hospital name" required>
                             </div>
                             <div class="form-group">
-                                <label for="hospital">Hospital Name *</label>
-                                <input type="text" id="hospital" name="hospital" placeholder="Enter hospital name" required>
+                                <label for="patientPhone">Contact Number</label>
+                                <input type="tel" id="patientPhone" placeholder="+92 300 xxxxxxx" required>
                             </div>
-                            <div class="form-group form-full">
-                                <label for="patientPhone">Phone Number *</label>
-                                <input type="tel" id="patientPhone" name="phone" placeholder="Enter phone number" required>
+                            <div class="form-group">
+                                <label for="units">Units Required</label>
+                                <input type="number" id="units" placeholder="Number of units" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="patientDisease">Condition/Disease</label>
+                                <input type="text" id="patientDisease" placeholder="Patient's medical condition" required>
                             </div>
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Add Patient</button>
-                            <button type="reset" class="btn btn-secondary">Clear</button>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Register Patient</button>
+                            <button type="reset" class="btn btn-secondary"><i class="fas fa-undo"></i> Clear</button>
                         </div>
                     </form>
                 </div>
-
-                <!-- Patient List -->
                 <div class="card">
                     <div class="card-header">
-                        <h3>Patient List</h3>
-                        <div class="search-box">
-                            <input type="text" id="patientSearch" placeholder="Search by name, hospital..." class="search-input">
-                            <span class="search-icon">🔍</span>
-                        </div>
+                        <h3>Patients List</h3>
+                        <div class="search-box"><input type="text" class="search-input" id="patientSearch" placeholder="Search patients..."><i class="fas fa-search search-icon"></i></div>
                     </div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Blood Group</th>
-                                    <th>Disease/Condition</th>
-                                    <th>Hospital</th>
-                                    <th>Phone</th>
-                                    <th>Actions</th>
-                                </tr>
+                                <tr><th>Patient ID</th><th>Name</th><th>Blood Group</th><th>Hospital</th><th>Units</th><th>Condition</th><th>Status</th><th>Actions</th></tr>
                             </thead>
                             <tbody id="patientTableBody">
-                                <tr>
-                                    <td>#P001</td>
-                                    <td>John Doe</td>
-                                    <td><span class="blood-badge">O+</span></td>
-                                    <td>Post-Surgery</td>
-                                    <td>City General Hospital</td>
-                                    <td>+1-555-0201</td>
-                                    <td>
-                                        <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
-                                        <button class="btn-icon delete" title="Delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#P002</td>
-                                    <td>Sarah Smith</td>
-                                    <td><span class="blood-badge">A+</span></td>
-                                    <td>Anemia</td>
-                                    <td>Central Medical Center</td>
-                                    <td>+1-555-0202</td>
-                                    <td>
-                                        <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
-                                        <button class="btn-icon delete" title="Delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#P003</td>
-                                    <td>Mike Johnson</td>
-                                    <td><span class="blood-badge">B+</span></td>
-                                    <td>Leukemia</td>
-                                    <td>State Hospital</td>
-                                    <td>+1-555-0203</td>
-                                    <td>
-                                        <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
-                                        <button class="btn-icon delete" title="Delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#P004</td>
-                                    <td>Lisa Brown</td>
-                                    <td><span class="blood-badge">AB+</span></td>
-                                    <td>Trauma</td>
-                                    <td>Emergency Care Hospital</td>
-                                    <td>+1-555-0204</td>
-                                    <td>
-                                        <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
-                                        <button class="btn-icon delete" title="Delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#P005</td>
-                                    <td>Robert Wilson</td>
-                                    <td><span class="blood-badge">O-</span></td>
-                                    <td>Surgery Prep</td>
-                                    <td>Metropolitan Hospital</td>
-                                    <td>+1-555-0205</td>
-                                    <td>
-                                        <button class="btn-icon edit" title="Edit"><i class="fas fa-pen"></i></button>
-                                        <button class="btn-icon delete" title="Delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
+                                <tr><td>#P1001</td><td>Ayesha Ahmed</td><td><span class="blood-badge">O+</span></td><td>PIMS Islamabad</td><td>2</td><td>Surgery</td><td><span class="status-badge urgent">Urgent</span></td><td><button class="btn-icon edit">✏️</button><button class="btn-icon delete" onclick="deleteRow(this)">🗑️</button></td></tr>
+                                <tr><td>#P1002</td><td>Hassan Khan</td><td><span class="blood-badge">A+</span></td><td>Mayo Hospital Lahore</td><td>1</td><td>Anemia</td><td><span class="status-badge approved">Scheduled</span></td><td><button class="btn-icon edit">✏️</button><button class="btn-icon delete" onclick="deleteRow(this)">🗑️</button></td></tr>
+                                <tr><td>#P1003</td><td>Zara Hassan</td><td><span class="blood-badge">B+</span></td><td>Sindh Medical</td><td>3</td><td>Emergency</td><td><span class="status-badge urgent">Critical</span></td><td><button class="btn-icon edit">✏️</button><button class="btn-icon delete" onclick="deleteRow(this)">🗑️</button></td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -189,7 +101,10 @@
             </section>
         </main>
     </div>
-
     <script src="js/main.js"></script>
+    <script>
+        function deleteRow(btn) { const row = btn.closest('tr'); row.style.opacity = '0'; setTimeout(() => row.remove(), 300); showToast('Patient record deleted', 'success'); }
+        document.addEventListener('DOMContentLoaded', () => { initializeMobileMenu(); initializeFormValidation(); initializeSearch(); });
+    </script>
 </body>
 </html>
