@@ -208,6 +208,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            initializeMobileMenu();
             if (typeof initializeFormValidation === 'function') {
                 initializeFormValidation();
                 initializeDonorForm();

@@ -86,6 +86,7 @@
     <script>
         function deleteRow(btn) { const row = btn.closest('tr'); row.style.opacity = '0'; setTimeout(() => row.remove(), 300); showToast('Stock record deleted', 'success'); }
         document.addEventListener('DOMContentLoaded', () => { 
+            initializeMobileMenu();
             if (typeof initializeFormValidation === 'function') {
                 initializeFormValidation(); 
                 initializeSearch(); 
