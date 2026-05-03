@@ -42,62 +42,123 @@ The system provides a dashboard, donor management, blood inventory management, p
 
 ## Database Structure
 
-### 1. User Table
+The Blood Bank Management System uses the following database tables. These tables are designed according to the actual website modules: Donors, Blood Inventory, Patients, Requests, Hospitals, and Blood Needs.
+
+---
+
+## 1. Donor Table
+
+This table stores the information of blood donors.
 
 | Field Name | Description |
 |-----------|-------------|
-| user_id | Primary key and unique user identifier |
-| blood_id | Foreign key linked with Blood table |
-| first_name | User's first name |
-| last_name | User's last name |
-| username | Login username |
-| password | Encrypted password |
-| mobile | Contact number |
-| datetime | Registration date and time |
-| status | Active or inactive status |
+| donor_id | Primary key and unique donor identifier |
+| full_name | Donor's full name |
+| age | Donor's age |
+| blood_group | Donor's blood group such as O+, O-, A+, A-, B+, B-, AB+, AB- |
+| phone | Donor's contact number |
+| address | Donor's address |
+| city | Donor's city |
+| last_donation_date | Date of donor's last blood donation |
 
-### 2. Blood Table
+---
 
-| Field Name | Description |
-|-----------|-------------|
-| blood_id | Primary key and unique blood group identifier |
-| blood | Blood group type such as O+, O-, A+, A-, B+, B-, AB+, AB- |
-| detail | Blood group description |
-| status | Availability status |
+## 2. Hospital Table
 
-### 3. Hospital Table
+This table stores hospital information.
 
 | Field Name | Description |
 |-----------|-------------|
 | hospital_id | Primary key and unique hospital identifier |
-| hospital_name | Name of hospital |
-| username | Hospital login username |
-| password | Encrypted password |
-| mobile | Hospital contact number |
-| datetime | Registration date and time |
-| status | Active or inactive status |
+| hospital_name | Name of the hospital |
+| city | City where the hospital is located |
+| phone | Hospital contact number |
 
-### 4. Stock Table
+---
+
+## 3. Blood Stock Table
+
+This table stores the available blood inventory records.
 
 | Field Name | Description |
 |-----------|-------------|
 | stock_id | Primary key and unique stock record ID |
+| donor_id | Foreign key linked with Donor table |
 | hospital_id | Foreign key linked with Hospital table |
-| blood_id | Foreign key linked with Blood table |
-| volume | Quantity of blood units |
-| status | Availability status |
+| blood_group | Blood group available in stock |
+| quantity | Quantity of blood units available |
+| expiry_date | Expiry date of the blood stock |
+| stock_status | Stock status such as Available, Low, Critical, or Expired |
 
-### 5. Request Table
+---
+
+## 4. Patient Table
+
+This table stores patient information and required blood details.
+
+| Field Name | Description |
+|-----------|-------------|
+| patient_id | Primary key and unique patient identifier |
+| hospital_id | Foreign key linked with Hospital table |
+| patient_name | Patient's full name |
+| blood_group_required | Blood group required by the patient |
+| disease_condition | Patient's disease or medical condition |
+| phone | Patient or guardian contact number |
+| status | Patient status such as Active, Critical, or Recovered |
+
+---
+
+## 5. Blood Request Table
+
+This table stores blood request records created for patients.
 
 | Field Name | Description |
 |-----------|-------------|
 | request_id | Primary key and unique request identifier |
-| user_id | Foreign key linked with User table |
+| patient_id | Foreign key linked with Patient table |
 | hospital_id | Foreign key linked with Hospital table |
-| blood_id | Foreign key linked with Blood table |
-| volume | Required blood units |
-| datetime | Request date and time |
-| status | Request status such as Pending, Approved, or Fulfilled |
+| blood_group | Required blood group |
+| quantity | Required quantity of blood units |
+| request_date | Date when the request was created |
+| urgency_level | Request urgency such as Normal, Urgent, or Critical |
+| status | Request status such as Pending, Approved, Fulfilled, or Rejected |
+
+---
+
+## 6. Blood Need Table
+
+This table stores emergency and community blood need records.
+
+| Field Name | Description |
+|-----------|-------------|
+| need_id | Primary key and unique blood need identifier |
+| patient_id | Foreign key linked with Patient table |
+| hospital_id | Foreign key linked with Hospital table |
+| blood_group | Required blood group |
+| units_needed | Number of blood units needed |
+| city | City where blood is required |
+| urgency_level | Urgency level such as Normal, Urgent, or Critical |
+| status | Need status such as Open, In Progress, Fulfilled, or Closed |
+
+---
+
+## Database Relationships
+
+| Relationship | Type | Description |
+|-------------|------|-------------|
+| Donor → Blood Stock | One-to-Many | One donor can donate blood multiple times, creating multiple stock records |
+| Hospital → Blood Stock | One-to-Many | One hospital can maintain multiple blood stock records |
+| Hospital → Patient | One-to-Many | One hospital can register multiple patients |
+| Patient → Blood Request | One-to-Many | One patient can create multiple blood requests |
+| Hospital → Blood Request | One-to-Many | One hospital can handle multiple blood requests |
+| Patient → Blood Need | One-to-Many | One patient can have multiple emergency blood need posts |
+| Hospital → Blood Need | One-to-Many | One hospital can manage multiple blood need records |
+
+---
+
+## Summary
+
+The database is designed to manage donors, hospitals, blood stock, patients, blood requests, and emergency blood needs. Each table has a primary key for unique identification, and foreign keys are used to connect related records. This structure helps reduce data duplication and makes the Blood Bank Management System easier to manage.
 
 ## Main Features
 
