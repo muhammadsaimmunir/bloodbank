@@ -740,6 +740,7 @@ body {
     align-items: center;
     gap: 5px;
     z-index: 1001;
+    touch-action: manipulation;
 }
 
 .hamburger-menu span {
