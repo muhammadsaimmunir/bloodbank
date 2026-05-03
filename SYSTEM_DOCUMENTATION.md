@@ -1,12 +1,11 @@
-# Pakistan Blood Bank - Emergency Response System
+# Blood Bank - Emergency Response System
 
 **Version:** 1.0  
-**Status:** Complete & Mobile-Friendly  
-**Theme:** Pakistani  
+**Status:** Complete & Mobile-Friendly   
 
 ## Overview
 
-Pakistan Blood Bank is a modern emergency response system designed to connect blood donors with hospitals and patients in critical need. The system provides an efficient platform to manage blood inventory, match donors based on location and blood group, and handle emergency blood requests.
+Blood Bank is a modern emergency response system designed to connect blood donors with hospitals and patients in critical need. The system provides an efficient platform to manage blood inventory, match donors based on location and blood group, and handle emergency blood requests.
 
 ## Problem Statement
 
