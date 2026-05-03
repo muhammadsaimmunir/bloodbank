@@ -275,15 +275,15 @@
         </div>
     </div>
 
-    <script>
+<script>
+    function goToHome() {
+        window.location.href = "index.html";
+    }
 
-setTimeout(() => {
-    window.location.href = 'index.html#fromSplash';
-}, 4000);
+    setTimeout(goToHome, 4000);
 
-document.addEventListener('click', () => {
-    window.location.href = 'index.html#fromSplash';
-});
-    </script>
+    document.addEventListener("click", goToHome);
+</script>
+    
 </body>
 </html>
