@@ -276,15 +276,14 @@
     </div>
 
     <script>
-        // Redirect to main page after 4 seconds
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 4000);
 
-        // Optional: Allow skipping splash by clicking
-        document.addEventListener('click', () => {
-            window.location.href = 'index.html';
-        });
+setTimeout(() => {
+    window.location.href = 'index.html#fromSplash';
+}, 4000);
+
+document.addEventListener('click', () => {
+    window.location.href = 'index.html#fromSplash';
+});
     </script>
 </body>
 </html>
