@@ -13,7 +13,7 @@ In emergency situations, patients and hospitals often face difficulty in finding
 
 ## Solution
 
-Pakistan Blood Bank solves this problem by:
+Blood Bank solves this problem by:
 - Connecting donors and hospitals on a single platform
 - Allowing hospitals to create blood requests
 - Automatically showing matching donors from the same city with required blood group
