@@ -179,7 +179,7 @@
                                 </tr>
                                 <tr>
                                     <td>#D1003</td>
-                                    <td>Uzair Rashi</td>
+                                    <td>Uzair Rashid</td>
                                     <td>25</td>
                                     <td><span class="blood-badge">B+</span></td>
                                     <td>Islamabad</td>
@@ -198,7 +198,7 @@
         </main>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
     <script>
         function deleteRow(btn) {
             const row = btn.closest('tr');
@@ -208,10 +208,11 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            initializeMobileMenu();
-            initializeFormValidation();
-            initializeDonorForm();
-            initializeSearch();
+            if (typeof initializeFormValidation === 'function') {
+                initializeFormValidation();
+                initializeDonorForm();
+                initializeSearch();
+            }
         });
     </script>
 </body>

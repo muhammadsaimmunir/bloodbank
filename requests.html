@@ -34,28 +34,24 @@
                     <form class="form" id="requestForm">
                         <div class="form-grid">
                             <div class="form-group">
-                                <label for="requestHospital">Hospital</label>
-                                <input type="text" id="requestHospital" placeholder="Hospital name" required>
+                                <label for="patientId">Patient/Hospital ID</label>
+                                <input type="text" id="patientId" placeholder="Patient or Hospital ID" required>
                             </div>
                             <div class="form-group">
                                 <label for="requestBlood">Blood Group</label>
                                 <select id="requestBlood" required><option value="">Select Blood Group</option><option value="O+">O+</option><option value="O-">O-</option><option value="A+">A+</option><option value="A-">A-</option><option value="B+">B+</option><option value="B-">B-</option><option value="AB+">AB+</option><option value="AB-">AB-</option></select>
                             </div>
                             <div class="form-group">
-                                <label for="requestUnits">Units Needed</label>
-                                <input type="number" id="requestUnits" placeholder="Number of units" min="1" required>
+                                <label for="requestQty">Units Needed</label>
+                                <input type="number" id="requestQty" placeholder="Number of units" min="1" required>
                             </div>
                             <div class="form-group">
-                                <label for="urgency">Urgency Level</label>
-                                <select id="urgency" required><option value="Normal">Normal</option><option value="Urgent">Urgent</option><option value="Critical">Critical</option></select>
+                                <label for="requestStatus">Status</label>
+                                <select id="requestStatus" required><option value="pending">Pending</option><option value="approved">Approved</option><option value="fulfilled">Fulfilled</option><option value="rejected">Rejected</option></select>
                             </div>
                             <div class="form-group">
-                                <label for="requestCity">City</label>
-                                <input type="text" id="requestCity" placeholder="City name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="requestContact">Contact Number</label>
-                                <input type="tel" id="requestContact" placeholder="+92 300 xxxxxxx" required>
+                                <label for="requestDate">Request Date</label>
+                                <input type="date" id="requestDate" required>
                             </div>
                         </div>
                         <div class="form-actions"><button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Create Request</button><button type="reset" class="btn btn-secondary"><i class="fas fa-undo"></i> Clear</button></div>
@@ -82,10 +78,16 @@
             </section>
         </main>
     </div>
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
     <script>
         function deleteRow(btn) { const row = btn.closest('tr'); row.style.opacity = '0'; setTimeout(() => row.remove(), 300); showToast('Request deleted', 'success'); }
-        document.addEventListener('DOMContentLoaded', () => { initializeMobileMenu(); initializeFormValidation(); initializeSearch(); });
+        document.addEventListener('DOMContentLoaded', () => { 
+            if (typeof initializeFormValidation === 'function') {
+                initializeFormValidation(); 
+                initializeSearch(); 
+                initializeRequestForm();
+            }
+        });
     </script>
 </body>
 </html>

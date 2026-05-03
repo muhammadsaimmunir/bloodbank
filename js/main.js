@@ -257,12 +257,11 @@ function initializeDonorForm() {
             name: form.querySelector('#donorName').value,
             age: form.querySelector('#donorAge').value,
             blood: form.querySelector('#donorBlood').value,
-            phone: form.querySelector('#donorPhone').value,
-            address: form.querySelector('#donorAddress').value,
-            lastDonation: form.querySelector('#lastDonation').value
+            city: form.querySelector('#donorCity').value,
+            phone: form.querySelector('#donorPhone').value
         };
 
-        // Add row to table
+        // Add row to table - order: ID, Name, Age, Blood Group, City, Contact, Status, Actions
         const tableBody = document.getElementById('donorTableBody');
         if (tableBody) {
             const newRow = document.createElement('tr');
@@ -271,8 +270,9 @@ function initializeDonorForm() {
                 <td>${formData.name}</td>
                 <td>${formData.age}</td>
                 <td><span class="blood-badge">${formData.blood}</span></td>
+                <td>${formData.city}</td>
                 <td>${formData.phone}</td>
-                <td>${formData.lastDonation}</td>
+                <td><span class="status-badge approved">Available</span></td>
                 <td>
                     <button class="btn-icon edit" title="Edit" onclick="showToast('Edit feature coming soon', 'info')">✏️</button>
                     <button class="btn-icon delete" title="Delete" onclick="deleteRow(this)">🗑️</button>
@@ -302,12 +302,18 @@ function initializeBloodForm() {
             id: `#B${Math.floor(Math.random() * 10000)}`,
             bloodGroup: form.querySelector('#bloodGroup').value,
             quantity: form.querySelector('#quantity').value,
+            collectionDate: form.querySelector('#collectionDate').value,
             expiryDate: form.querySelector('#expiryDate').value,
-            donorId: form.querySelector('#donorId').value,
+            hospital: form.querySelector('#hospital').value,
             status: 'Available'
         };
 
-        // Add row to table
+        // Calculate days left
+        const expiry = new Date(formData.expiryDate);
+        const today = new Date();
+        const daysLeft = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+
+        // Add row to table - order: Stock ID, Blood Group, Quantity, Collection, Expiry, Hospital, Days Left, Status, Actions
         const tableBody = document.getElementById('bloodTableBody');
         if (tableBody) {
             const newRow = document.createElement('tr');
@@ -315,8 +321,10 @@ function initializeBloodForm() {
                 <td>${formData.id}</td>
                 <td><span class="blood-badge">${formData.bloodGroup}</span></td>
                 <td>${formData.quantity} units</td>
+                <td>${formData.collectionDate}</td>
                 <td>${formData.expiryDate}</td>
-                <td>${formData.donorId}</td>
+                <td>${formData.hospital}</td>
+                <td>${daysLeft}</td>
                 <td><span class="status-badge approved">Available</span></td>
                 <td>
                     <button class="btn-icon edit" title="Edit" onclick="showToast('Edit feature coming soon', 'info')">✏️</button>
@@ -347,12 +355,13 @@ function initializePatientForm() {
             id: `#P${Math.floor(Math.random() * 10000)}`,
             name: form.querySelector('#patientName').value,
             bloodGroup: form.querySelector('#patientBlood').value,
-            disease: form.querySelector('#patientDisease').value,
             hospital: form.querySelector('#hospital').value,
+            units: form.querySelector('#units').value,
+            condition: form.querySelector('#patientDisease').value,
             phone: form.querySelector('#patientPhone').value
         };
 
-        // Add row to table
+        // Add row to table - order must match table headers: ID, Name, Blood Group, Hospital, Units, Condition, Status, Actions
         const tableBody = document.getElementById('patientTableBody');
         if (tableBody) {
             const newRow = document.createElement('tr');
@@ -360,9 +369,10 @@ function initializePatientForm() {
                 <td>${formData.id}</td>
                 <td>${formData.name}</td>
                 <td><span class="blood-badge">${formData.bloodGroup}</span></td>
-                <td>${formData.disease}</td>
                 <td>${formData.hospital}</td>
-                <td>${formData.phone}</td>
+                <td>${formData.units}</td>
+                <td>${formData.condition}</td>
+                <td><span class="status-badge pending">Pending</span></td>
                 <td>
                     <button class="btn-icon edit" title="Edit" onclick="showToast('Edit feature coming soon', 'info')">✏️</button>
                     <button class="btn-icon delete" title="Delete" onclick="deleteRow(this)">🗑️</button>
@@ -390,22 +400,24 @@ function initializeRequestForm() {
 
         const statusValue = form.querySelector('#requestStatus').value;
         const statusMap = {
-            'pending': 'pending',
-            'approved': 'approved',
-            'fulfilled': 'completed',
-            'rejected': 'completed'
-        };
-
-        const formData = {
-            id: `#R${Math.floor(Math.random() * 10000)}`,
-            patientId: form.querySelector('#patientId').value,
+            hospital: form.querySelector('#patientId').value,
             bloodGroup: form.querySelector('#requestBlood').value,
             quantity: form.querySelector('#requestQty').value,
             requestDate: form.querySelector('#requestDate').value,
             status: statusValue
         };
 
-        // Add row to table
+        // Add row to table - order: Request ID, Hospital, Blood Group, Units, City, Urgency, Date, Status, Actions
+        const tableBody = document.getElementById('requestTableBody');
+        if (tableBody) {
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${formData.id}</td>
+                <td>${formData.hospital}</td>
+                <td><span class="blood-badge">${formData.bloodGroup}</span></td>
+                <td>${formData.quantity}</td>
+                <td>-</td>
+                <td><span class="status-badge ${statusMap[formData.status]}">${statusValue.charAt(0).toUpperCase() + statusValue.slice(1)}</span>
         const tableBody = document.getElementById('requestTableBody');
         if (tableBody) {
             const newRow = document.createElement('tr');
